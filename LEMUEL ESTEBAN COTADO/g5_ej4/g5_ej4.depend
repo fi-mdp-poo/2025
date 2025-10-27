@@ -1,0 +1,35 @@
+# depslib dependency file v1.0
+1761513413 source:c:\users\lemuc\desktop\poo_2025\guia_5\g5_ej4\factura.cpp
+	"Factura.h"
+
+1761594658 c:\users\lemuc\desktop\poo_2025\guia_5\g5_ej4\factura.h
+	<string>
+
+1761598417 source:c:\users\lemuc\desktop\poo_2025\guia_5\g5_ej4\recibodepago.cpp
+	"ReciboDePago.h"
+
+1761598070 c:\users\lemuc\desktop\poo_2025\guia_5\g5_ej4\recibodepago.h
+	<iostream>
+	<string>
+
+1761598800 source:c:\users\lemuc\desktop\poo_2025\guia_5\g5_ej4\calculadorimpositivo.cpp
+	"CalculadorImpositivo.h"
+
+1761598245 c:\users\lemuc\desktop\poo_2025\guia_5\g5_ej4\calculadorimpositivo.h
+	<iostream>
+	<string>
+	<vector>
+	"Factura.h"
+	"ReciboDePago.h"
+	"FormaDePago.h"
+
+1761581859 c:\users\lemuc\desktop\poo_2025\guia_5\g5_ej4\formadepago.h
+	"Factura.h"
+	<vector>
+
+1761598575 source:c:\users\lemuc\desktop\poo_2025\guia_5\g5_ej4\main.cpp
+	"CalculadorImpositivo.h"
+
+1761595515 source:c:\users\lemuc\desktop\poo_2025\guia_5\g5_ej4\formadepago.cpp
+	"FormaDePago.h"
+
