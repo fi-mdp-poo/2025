@@ -1,0 +1,174 @@
+Ejemplo genérico de como clonar un directorio de un repositorio.
+
+	Ejemplo:
+
+		proyecto-ejemplo/
+		└── src/
+			└── utils/
+
+
+01.- Clona el repositorio, pero sin descargar los archivos todavía
+
+	git clone --no-checkout https://github.com/usuario/repositorio.git
+
+
+02.- Esto crea una carpeta proyecto-ejemplo/, pero no descarga los contenidos (solo la estructura de Git).
+
+	mkdir proyecto-ejemplo
+
+
+03.- Entra en la carpeta del proyecto
+
+	cd proyecto-ejemplo
+
+
+04.- Activa el modo de “sparse checkout” (El siguiente comando le dice a Git que solo bajaremos carpetas específicas; no todo el repo.)
+
+	git sparse-checkout init --cone
+
+
+05.- Indica qué carpeta se quiere clonar (Por ejemplo, si solo te interesa src/utils)
+
+	git sparse-checkout set src/utils
+
+	Nota: Git ahora descarga solo esa carpeta y su contenido; verificar si se descargo correctamente.
+
+
+
+06.- (Opcional) Agregar otra carpeta más tarde. (Si después necesitas otra parte del proyecto como por ejemplo docs/).
+
+	git sparse-checkout set src/utils docs/
+
+	Nota: Git añadirá esa carpeta sin bajar el resto del repo.
+
+
+*******************************************************************************************
+******    Hasta este punto se han clonado las distintas carpetas del repositorio.    ******
+******    A partir de este punto comienza la gestión de la actualización de los      ******
+******    cambios realizados localmente.                                             ******
+*******************************************************************************************
+
+
+07.- Verifica el estado de tus cambios:
+
+	git status
+
+	Ej: 
+		modified:   src/utils/helper.py
+
+
+08.- Agrega los cambios al “staging area”
+
+	Para añadir todos los archivos modificados dentro de tu carpeta:
+
+		git add src/utils/
+
+	O si quieres agregar todo lo que cambió (aunque solo tengas esa carpeta):
+
+		git add .
+
+
+09.- Crea un commit con un mensaje descriptivo
+
+	git commit -m "Corrijo bug en funciones de utilidades"
+
+
+10.- Sube tus cambios al repositorio remoto
+
+	Si estás trabajando sobre la rama main:
+
+		git push origin main
+
+	O si estás en otra rama (por ejemplo, feature/nueva-funcion):
+
+		git push origin feature/nueva-funcion
+
+
+11.- Crear una rama nueva antes de subir (recomendado)
+
+	git checkout -b feature/mejora-utils
+
+	# (haces tus cambios, add, commit)
+
+	git push origin feature/mejora-utils
+
+
+
+
+
+
+
+Ejemplo práctico de la POO
+
+
+Ejemplo genérico de como clonar un directorio de un repositorio.
+
+	Ejemplo:
+
+		2025/
+		└── Nombre_del_alumno/
+
+
+
+01.- Clona el repositorio, pero sin descargar los archivos todavía
+
+	git clone --no-checkout https://github.com/fi-mdp-poo/2025.git
+
+
+02.- Esto crea una carpeta proyecto-ejemplo/, pero no descarga los contenidos (solo la estructura de Git).
+
+	mkdir ProgOO
+
+
+03.- Entra en la carpeta del proyecto
+
+	cd ProgOO
+
+
+04.- Activa el modo de “sparse checkout” (El siguiente comando le dice a Git que solo bajaremos carpetas específicas; no todo el repo.)
+
+	git sparse-checkout init --cone
+
+
+05.- Indica qué carpeta se quiere clonar (Por ejemplo, si solo te interesa src/utils)
+
+	git sparse-checkout set Nombre_del_alumno
+
+	Nota: Git ahora descarga solo esa carpeta y su contenido; verificar si se descargo correctamente.
+
+
+*******************************************************************************************
+******    Hasta este punto se han clonado las distintas carpetas del repositorio.    ******
+******    A partir de este punto comienza la gestión de la actualización de los      ******
+******    cambios realizados localmente.                                             ******
+*******************************************************************************************
+
+06.- Verifica el estado de tus cambios:
+
+	git status
+
+	Ej: 
+		modified:   src/utils/helper.py
+
+
+07.- Agrega los cambios al “staging area”
+
+	Para añadir todos los archivos modificados dentro de tu carpeta:
+
+		git add Nombre_del_alumno
+
+	O si quieres agregar todo lo que cambió (aunque solo tengas esa carpeta):
+
+		git add .
+
+
+08.- Crea un commit con un mensaje descriptivo
+
+	git commit -m "Agregar un comentario"
+
+
+09.- Sube tus cambios al repositorio remoto
+
+	Si estás trabajando sobre la rama main:
+
+		git push origin main
