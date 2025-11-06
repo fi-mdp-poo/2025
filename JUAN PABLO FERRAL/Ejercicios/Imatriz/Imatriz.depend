@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1758842017 source:c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\imatriz\main.cpp
+	<iostream>
+	"Imatriz.h"
+
+1758845195 source:c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\imatriz\src\imatriz.cpp
+	"Imatriz.h"
+
+1758845196 c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\imatriz\include\imatriz.h
+	<iostream>
+	<cmath>
+

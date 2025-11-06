@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1758569983 source:c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\cvector\main.cpp
+	<iostream>
+	"Cvector.h"
+
+1758502629 source:c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\cvector\src\complejo.cpp
+	"Complejo.h"
+
+1758502629 c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\cvector\include\complejo.h
+	<iostream>
+	<cmath>
+
+1758570165 source:c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\cvector\src\cvector.cpp
+	"Cvector.h"
+
+1758570358 c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\cvector\include\cvector.h
+	<iostream>
+	<cmath>
+	"Complejo.h"
+

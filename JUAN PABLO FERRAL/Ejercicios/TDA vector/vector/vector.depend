@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1584205420 source:c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\tda vector\vector\main.c
+	<stdio.h>
+	<stdlib.h>
+
+1755812485 source:c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\tda vector\vector\vector.c
+	<stdio.h>
+	<stdlib.h>
+	"vector.h"
+
+1755810437 c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\tda vector\vector\vector.h
+

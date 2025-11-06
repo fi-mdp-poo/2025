@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1758896998 source:c:\users\user\desktop\cmatriz\main.cpp
+	<iostream>
+	"Cmatriz.h"
+	"Complejo.h"
+
+1758896487 c:\users\user\desktop\cmatriz\include\cmatriz.h
+	<iostream>
+	<cmath>
+	"Cvector.h"
+
+1758570358 c:\users\user\desktop\cmatriz\include\cvector.h
+	<iostream>
+	<cmath>
+	"Complejo.h"
+
+1758502629 c:\users\user\desktop\cmatriz\include\complejo.h
+	<iostream>
+	<cmath>
+
+1758897334 source:c:\users\user\desktop\cmatriz\src\cmatriz.cpp
+	"Cmatriz.h"
+
+1758502629 source:c:\users\user\desktop\cmatriz\src\complejo.cpp
+	"Complejo.h"
+
+1758570165 source:c:\users\user\desktop\cmatriz\src\cvector.cpp
+	"Cvector.h"
+

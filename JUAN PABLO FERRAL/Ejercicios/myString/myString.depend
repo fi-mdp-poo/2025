@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1759105742 source:c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\mystring\main.cpp
+	<iostream>
+	"myString.h"
+
+1759107817 source:c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\mystring\src\mystring.cpp
+	"myString.h"
+
+1759107817 c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\mystring\include\mystring.h
+	<iostream>
+	<cstring>
+

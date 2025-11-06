@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1758568218 source:c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\ivector\main.cpp
+	<iostream>
+	"Ivector.h"
+
+1758567999 source:c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\ivector\src\ivector.cpp
+	"Ivector.h"
+
+1758502629 c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\ivector\include\ivector.h
+	<iostream>
+	<cmath>
+

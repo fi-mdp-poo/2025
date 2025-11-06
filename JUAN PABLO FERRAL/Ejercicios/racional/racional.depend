@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1757684613 source:d:\poo2025\racional\main.cpp
+	"racional.h"
+	<iostream>
+	<iomanip>
+
+1757683827 d:\poo2025\racional\include\racional.h
+	<iostream>
+
+1757683827 source:d:\poo2025\racional\src\racional.cpp
+	"Racional.h"
+	<cmath>
+
+1757629871 source:c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\racional\main.cpp
+	"racional.h"
+	<iostream>
+	<iomanip>
+
+1757629955 c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\racional\include\racional.h
+	<iostream>
+
+1757630127 source:c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\racional\src\racional.cpp
+	"Racional.h"
+	<cmath>
+

@@ -1,0 +1,48 @@
+# depslib dependency file v1.0
+1759196081 source:c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\practicaparcial\main.cpp
+	<iostream>
+	"CPantalla.h"
+
+1759196138 source:c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\practicaparcial\src\ccolor.cpp
+	"CColor.h"
+
+1759195960 c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\practicaparcial\include\ccolor.h
+	<iostream>
+
+1759198742 source:c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\practicaparcial\src\cpantalla.cpp
+	"CPantalla.h"
+
+1759198742 c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\practicaparcial\include\cpantalla.h
+	"CMatriz.h"
+	"CColor.h"
+
+1759192432 c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\practicaparcial\include\cmatriz.h
+	<iostream>
+	<fstream>
+	<iomanip>
+
+1759192021 source:c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\practicaparcial\src\cmatriz.cpp
+	"CMatriz.h"
+
+1759198779 source:c:\users\juanp\onedrive\documentos\juan\facultad\3ero\programacion orientada a objetos\ejercicios\practicaparcial\main.cpp
+	<iostream>
+	"CPantalla.h"
+
+1759198742 c:\users\juanp\onedrive\documentos\juan\facultad\3ero\programacion orientada a objetos\ejercicios\practicaparcial\include\cpantalla.h
+	"CMatriz.h"
+	"CColor.h"
+
+1759192432 c:\users\juanp\onedrive\documentos\juan\facultad\3ero\programacion orientada a objetos\ejercicios\practicaparcial\include\cmatriz.h
+	<iostream>
+	<fstream>
+	<iomanip>
+
+1759195960 c:\users\juanp\onedrive\documentos\juan\facultad\3ero\programacion orientada a objetos\ejercicios\practicaparcial\include\ccolor.h
+	<iostream>
+
+1759196138 source:c:\users\juanp\onedrive\documentos\juan\facultad\3ero\programacion orientada a objetos\ejercicios\practicaparcial\src\ccolor.cpp
+	"CColor.h"
+
+1759198742 source:c:\users\juanp\onedrive\documentos\juan\facultad\3ero\programacion orientada a objetos\ejercicios\practicaparcial\src\cpantalla.cpp
+	"CPantalla.h"
+

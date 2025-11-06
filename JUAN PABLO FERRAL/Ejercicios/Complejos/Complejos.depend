@@ -1,0 +1,22 @@
+# depslib dependency file v1.0
+1758292563 source:c:\users\user\desktop\complejos\main.cpp
+	"Complejo.h"
+	<iostream>
+
+1758292628 source:c:\users\user\desktop\complejos\src\complejo.cpp
+	"Complejo.h"
+
+1758293948 c:\users\user\desktop\complejos\include\complejo.h
+	<iostream>
+
+1758502664 source:c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\complejos\main.cpp
+	"Complejo.h"
+	<iostream>
+
+1759095031 c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\complejos\include\complejo.h
+	<iostream>
+	<cmath>
+
+1759098053 source:c:\users\juanp\onedrive\documentos\juan\facultad\3er año\programacion orientada a objetos\ejercicios\complejos\src\complejo.cpp
+	"Complejo.h"
+
