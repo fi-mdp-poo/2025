@@ -22,6 +22,7 @@ class Cuenta
         unsigned int getDniTit() const { return dnititular; }
         unsigned int getId() const { return id; }
         long int getSaldo() const { return saldo; }
+        virtual void printCuenta(ostream&) const = 0;
         virtual ~Cuenta(){};
         
     protected:

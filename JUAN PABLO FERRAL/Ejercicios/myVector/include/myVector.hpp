@@ -11,7 +11,6 @@ using namespace std;
 template <class T> class myVector
 
 {
-    //friend istream& operator >> (istream&,myVector&);
     public:
         myVector(size_t n=10);
         myVector(const myVector<T>&);

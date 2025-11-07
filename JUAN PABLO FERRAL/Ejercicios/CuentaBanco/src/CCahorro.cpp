@@ -59,3 +59,14 @@ void CCahorro :: serializacion(vector<uint8_t>& datos) const
     p = reinterpret_cast <const uint8_t*>(&contador);
     datos.insert(datos.end(), p, p + sizeof(contador));
 }
+
+void CCahorro :: printCuenta(ostream& os) const
+{
+    os << "Caja de ahorro" << endl
+    << "Id de la cuenta: " << id << endl
+    << "Dni del titular: " << dnititular << endl 
+    <<"Numero maximo de extracciones por mes: " << maxExtracciones << endl
+    << "Numero de extracciones realizadas a la fecha:" << contador << endl
+    << "Saldo en la cuenta: " << saldo << endl ;
+}
+

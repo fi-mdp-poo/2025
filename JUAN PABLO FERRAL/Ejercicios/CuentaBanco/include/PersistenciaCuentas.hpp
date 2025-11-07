@@ -12,7 +12,7 @@ class PersistenciaCuentas
 {
     public:
         static void guardarEstadoBanco(const char*,const vector<Cuenta*>&);
-        static void cargarEstadoBanco(const char* , Banco&);
+        static vector<Cuenta*> cargarEstadoBanco(const char*);
 };
 
 #endif

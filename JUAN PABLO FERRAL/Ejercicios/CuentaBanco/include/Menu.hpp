@@ -9,13 +9,13 @@
 class Menu 
 {
 public:
-    Menu(char* argv[]);
+    Menu(Banco&, char* argv[]);
     ~Menu();
     void run();
 
 private:
 
-    Banco miBanco;
+    Banco& miBanco;
     GestorClientes gestorClientes;
 
     const char* ARCHIVO_CLIENTES;

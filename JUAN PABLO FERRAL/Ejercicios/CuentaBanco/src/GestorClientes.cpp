@@ -16,11 +16,12 @@ GestorClientes :: ~GestorClientes()
 long int GestorClientes::_buscarIndiceInsercion(unsigned int dni) const
 {
     long int low = 0;
-    long int high = clientes.size()-1;
+    long int high = static_cast<long int>(clientes.size()-1);
     long int mid = (high + low)/2;
     long int indiceInsercion = clientes.size();
     while(low<=high)
     {
+        mid = (high + low)/2;
         if(clientes[mid]->getDni() < dni)
         {
             low = mid+1;

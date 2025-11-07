@@ -11,6 +11,7 @@ class CCorriente : public Cuenta
         CCorriente(unsigned int, unsigned int, long int);
         CCorriente(unsigned int, unsigned int, long int, long int);
         bool extraccion(long int) override;
+        void printCuenta(ostream&) const override;
         void serializacion(vector<uint8_t>&) const override; 
     private:
         long int tope;

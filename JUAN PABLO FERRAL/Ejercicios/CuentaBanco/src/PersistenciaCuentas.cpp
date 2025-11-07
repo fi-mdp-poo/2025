@@ -23,9 +23,10 @@ void PersistenciaCuentas::guardarEstadoBanco(const char* nombreArchivo ,const ve
     }
 }
 
-void PersistenciaCuentas::cargarEstadoBanco(const char* nombreArchivo, Banco& bank)
+vector<Cuenta*> PersistenciaCuentas::cargarEstadoBanco(const char* nombreArchivo)
 {
     ifstream fentrada(nombreArchivo, ios::binary);
+    vector<Cuenta*> result;
     if(fentrada.is_open())
     {
         uint8_t tipo = 0;
@@ -44,15 +45,15 @@ void PersistenciaCuentas::cargarEstadoBanco(const char* nombreArchivo, Banco& ba
             {
                 case 1:
                     fentrada.read(reinterpret_cast<char*>(&tope),sizeof(long int));
-                    bank.agregarCuenta(new CCorriente(dnititular,id,tope,saldo));
+                    result.push_back(new CCorriente(dnititular,id,tope,saldo));
                     break;
-                case 2:
+                case 2: 
                     fentrada.read(reinterpret_cast<char*>(&contador),sizeof(unsigned int));
-                    bank.agregarCuenta(new CCahorro(dnititular,id,contador,saldo));
+                    result.push_back(new CCahorro(dnititular,id,contador,saldo));
                     break;
                 case 3:
                     fentrada.read(reinterpret_cast<char*>(&cantDia),sizeof(int));
-                    bank.agregarCuenta(new CCuniversitaria(dnititular,id,cantDia,saldo));
+                    result.push_back(new CCuniversitaria(dnititular,id,cantDia,saldo));
                     break;
             }
         }
@@ -62,4 +63,5 @@ void PersistenciaCuentas::cargarEstadoBanco(const char* nombreArchivo, Banco& ba
     {
         cout << "Error al abrir el achivo: " << nombreArchivo << endl;
     }
+    return result;
 }

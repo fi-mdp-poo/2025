@@ -68,3 +68,12 @@ void CCorriente :: serializacion(vector<uint8_t>& datos) const
     p = reinterpret_cast <const uint8_t*>(&tope);
     datos.insert(datos.end(), p, p + sizeof(tope));
 }
+
+void CCorriente :: printCuenta(ostream& os) const
+{
+    os << "Cuenta corriente" << endl
+    << "Id de la cuenta: " << id << endl
+    << "Dni del titular: " << dnititular << endl
+    << "Tope pactado para giro en descubierto: " << tope << endl
+    << "Saldo en la cuenta: " << saldo << endl;
+}

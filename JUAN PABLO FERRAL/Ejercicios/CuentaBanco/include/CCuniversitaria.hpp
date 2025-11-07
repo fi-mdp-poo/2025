@@ -12,6 +12,7 @@ class CCuniversitaria : public Cuenta
         CCuniversitaria(unsigned int, unsigned int, int, long int);
         bool extraccion(long int) override; 
         void serializacion(vector<uint8_t>&) const override;
+        void printCuenta(ostream&) const override;
         void pasarDia() { cantDia=0; }
         void setCantDia(int cantidad) { cantDia = cantidad; }       
     private:

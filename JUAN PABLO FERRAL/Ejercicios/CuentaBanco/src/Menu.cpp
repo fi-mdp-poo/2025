@@ -1,7 +1,7 @@
 #include "Menu.hpp"     
 
-Menu::Menu(char* argv[]) :
-    miBanco("Banco POO"), 
+Menu::Menu(Banco& b, char* argv[]) :
+    miBanco(b), 
     gestorClientes(argv[1]), 
     ARCHIVO_CLIENTES(argv[1]),
     ARCHIVO_CUENTAS(argv[2]),
@@ -46,13 +46,11 @@ void Menu::run()
 void Menu::_cargarDatos() 
 {
     gestorClientes.cargarClientes();
-    PersistenciaCuentas::cargarEstadoBanco(ARCHIVO_CUENTAS, miBanco);
 }
 
 void Menu::_guardarDatos() 
 {
     gestorClientes.guardarClientes();
-    PersistenciaCuentas::guardarEstadoBanco(ARCHIVO_CUENTAS, miBanco.getCuentas());
 }
 
 void Menu::_mostrarMenuPrincipal() const 
@@ -156,11 +154,7 @@ void Menu::_opcionCrearCuenta()
             _limpiarBufferCin();
         }
         _limpiarBufferCin();
-        Cuenta* nuevaCuenta = CuentasFactory::crearCuenta(tipo, dni, ARCHIVO_IDS);
-        if (nuevaCuenta) 
-        {
-            miBanco.agregarCuenta(nuevaCuenta);
-        }
+        miBanco.agregarCuenta(tipo, dni, ARCHIVO_IDS);
     }  
 }
 

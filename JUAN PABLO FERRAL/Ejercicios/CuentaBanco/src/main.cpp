@@ -9,7 +9,8 @@ int main(int argc, char* argv[])
         std::cerr << "Uso: " << argv[0] << " <archivo_clientes> <archivo_cuentas> <archivo_ids>" << std::endl;
         return 1; 
     }
-    Menu menuPrincipal(argv);
+    Banco b("Banco POO", argv[2]);
+    Menu menuPrincipal(b, argv);
     menuPrincipal.run();
     return 0; 
 }

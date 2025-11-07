@@ -21,8 +21,6 @@ void Cuenta::deposito()
 
 ostream& operator << (ostream& os,const Cuenta& c)
 {
-    os << "Id de la cuenta: " << c.id << endl
-    << "Dni del titular: " << c.dnititular << endl 
-    << "Saldo en la cuenta: " << c.saldo << endl;
+    c.printCuenta(os);
     return os;
 }

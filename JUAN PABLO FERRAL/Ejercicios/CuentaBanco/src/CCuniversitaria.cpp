@@ -60,3 +60,13 @@ void CCuniversitaria :: serializacion(vector<uint8_t>& datos) const
     p = reinterpret_cast <const uint8_t*>(&cantDia);
     datos.insert(datos.end(), p, p + sizeof(cantDia));
 }
+
+void CCuniversitaria :: printCuenta(ostream& os) const
+{
+    os << "Cuenta universitaria" << endl
+    << "Id de la cuenta: " << id << endl
+    << "Dni del titular: " << dnititular << endl
+    << "Maximo monto de extraccion diario: " << maxDiario << endl
+    << "Cantidad extraida en el dia: " << cantDia << endl
+    << "Saldo en la cuenta: " << saldo << endl;
+}

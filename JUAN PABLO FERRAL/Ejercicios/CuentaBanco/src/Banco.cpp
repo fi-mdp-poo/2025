@@ -1,24 +1,39 @@
 #include "Banco.hpp"
 
-Banco :: Banco(const char* name):
-     nombre(name)
-{}
+Banco :: Banco(const char* name, const char* Archivo):
+     nombre(name),
+     archivo_cuentas(Archivo)
+{
+    persistenciaCargar();
+}
 
 Banco :: ~Banco()
 {
+    persistenciaGuardar();
     for(size_t i=0 ; i<cuentas.size() ; i++)
     {
         delete cuentas[i];
     }
 }
 
-void Banco :: agregarCuenta(Cuenta* ptr)
+void Banco :: agregarCuenta(int tipo, unsigned int dni, const char* ARCHIVO_IDS)
 {
-    if(ptr != NULL)
+    cuentas.push_back(CuentasFactory::crearCuenta(tipo, dni, ARCHIVO_IDS));
+    /*if(ptr != NULL)
     {
         cuentas.push_back(ptr);
         cout << "Se ha agregado una nueva cuenta con exito" << endl;
-    }
+    }*/
+}
+
+void Banco :: persistenciaGuardar()
+{
+    PersistenciaCuentas::guardarEstadoBanco(archivo_cuentas, cuentas);
+}
+
+void Banco :: persistenciaCargar()
+{
+    cuentas = PersistenciaCuentas::cargarEstadoBanco(archivo_cuentas);
 }
 
 Cuenta* Banco::buscarCuenta(unsigned int id) const
@@ -52,13 +67,13 @@ Cuenta* Banco::buscarCuenta(unsigned int id) const
 
 void Banco::mostrarCuentas() const 
 {
-    cout << "\n--- Estado de Cuentas en el Banco '" << nombre << "' ---" <<endl;
+    cout << "\n--- Estado de Cuentas en el Banco '" << nombre << "' ---" <<endl<<endl;
     if (cuentas.empty()) {
         cout << "No hay cuentas registradas en el banco." << endl;
     } else {
         for (size_t i=0 ; i<cuentas.size() ; i++) 
         {
-            cout << *(cuentas[i]) << endl; 
+            cout << *(cuentas[i]) << endl << endl; 
         }
     }
     cout << "-------------------------------------------------" << endl;

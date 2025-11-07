@@ -55,6 +55,7 @@ rebuild: clean all
 
 # Run the program
 run: $(TARGET)
-	./$(TARGET)
+	@echo "Ejecutando ./$(TARGET) con argumentos..."
+	./$(TARGET) $(ARGS)
 
 .PHONY: all clean rebuild directories run

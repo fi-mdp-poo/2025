@@ -10,7 +10,7 @@ Cuenta* CuentasFactory :: crearCuenta(int tipo, unsigned int dni, const char* no
         fileIDs.read(reinterpret_cast<char*>(&idNuevo),sizeof(unsigned int));
         fileIDs.close();
     }
-    Cuenta* result = NULL;
+    Cuenta* result = nullptr;
     switch (tipo)
     {
     case 1:
