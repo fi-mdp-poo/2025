@@ -4,7 +4,6 @@
 #include <iostream>
 #include <utility>
 #include <stdexcept>
-#include <cmath>
 #include <memory>
 
 using namespace std;
@@ -33,6 +32,10 @@ template <class T> class myVector
         void resize(size_t nuevaLongitud, const T& dato);
         void insertar(size_t, const T&);
         void eliminar(size_t);
+        iterator begin() { return iterator(arreglo.get()); }
+        const_iterator begin() const { return const_iterator(arreglo.get()); } 
+        iterator end() { return iterator(arreglo.get() + longitud); }
+        const_iterator end() const { return const_iterator(arreglo.get() + longitud); }
 
         friend ostream& operator << (ostream& oS,const myVector<T>& obj)
         {
@@ -48,7 +51,123 @@ template <class T> class myVector
             oS << "]";
             return oS;
         }
-        
+
+        class iterator
+        {
+            private:
+                T* i_ptr;
+            public:
+                iterator(T* ptr) : i_ptr(ptr) {}
+                T& operator*() { return *i_ptr; }
+                T* operator->() { return i_ptr; }
+                iterator& operator++()
+                {
+                    ++i_ptr;
+                    return *this;
+                }
+                iterator operator++(int)
+                {
+                    iterator aux(i_ptr++);
+                    return aux;
+                }
+                iterator& operator--()
+                {
+                    --i_ptr;
+                    return *this;
+                }
+                iterator operator--(int)
+                {
+                    iterator aux(i_ptr--);
+                    return aux;
+                }
+                iterator operator + (size_t n) const
+                {
+                    return iterator(i_ptr + n);
+                }
+                iterator operator - (size_t n) const
+                {
+                    return iterator(i_ptr - n);
+                }
+                ptrdiff_t operator - (const iterator it) const
+                {
+                    return i_ptr - it.i_ptr;
+                }
+                iterator& operator += (size_t n)
+                {
+                    i_ptr += n;
+                    return *this;
+                }
+                iterator& operator -= (size_t n)
+                {
+                    i_ptr -= n;
+                    return *this;
+                }
+                bool operator ==(const iterator& it) const { return i_ptr == it.i_ptr ; }
+                bool operator !=(const iterator& it) const { return ! ( *this == it) ; }
+                bool operator < (const iterator& it) const { return i_ptr < it.i_ptr; }
+                bool operator <= (const iterator& it) const { return i_ptr <= it.i_ptr; }
+                bool operator > (const iterator& it) const { return !(*this <= it); }
+                bool operator >= (const iterator& it) const { return !(*this < it); } 
+        };
+
+        class const_iterator
+        {
+            private:
+                const T* ci_ptr;
+            public:
+                const_iterator(const T* ptr) : ci_ptr(ptr) {}
+                const T& operator*() const { return *ci_ptr; }
+                const T* operator->() const { return ci_ptr; }
+                const_iterator& operator++()
+                {
+                    ++ci_ptr;
+                    return *this;
+                }
+                const_iterator operator++(int)
+                {
+                    const_iterator aux(ci_ptr++);
+                    return aux;
+                }
+                const_iterator& operator--()
+                {
+                    --ci_ptr;
+                    return *this;
+                }
+                const_iterator operator--(int)
+                {
+                    const_iterator aux(ci_ptr--);
+                    return aux;
+                }
+                const_iterator operator + (size_t n) const
+                {
+                    return const_iterator(ci_ptr + n);
+                }
+                const_iterator operator - (size_t n) const
+                {
+                    return const_iterator(ci_ptr - n);
+                }
+                ptrdiff_t operator - (const const_iterator it) const
+                {
+                    return ci_ptr - it.ci_ptr;
+                }
+                const_iterator& operator += (size_t n)
+                {
+                    ci_ptr += n;
+                    return *this;
+                }
+                const_iterator& operator -= (size_t n)
+                {
+                    ci_ptr -= n;
+                    return *this;
+                }
+                bool operator ==(const const_iterator& it) const { return ci_ptr == it.ci_ptr ; }
+                bool operator !=(const const_iterator& it) const { return ! ( *this == it) ; }
+                bool operator < (const const_iterator& it) const { return ci_ptr < it.ci_ptr; }
+                bool operator <= (const const_iterator& it) const { return ci_ptr <= it.ci_ptr; }
+                bool operator > (const const_iterator& it) const { return !(*this <= it); }
+                bool operator >= (const const_iterator& it) const { return !(*this < it); } 
+        };
+             
     private:
         size_t capacidad;
         size_t longitud;
