@@ -5,6 +5,7 @@
 #include <utility>
 #include <stdexcept>
 #include <cmath>
+#include <memory>
 
 using namespace std;
 
@@ -17,18 +18,19 @@ template <class T> class myVector
         myVector(myVector<T>&&) noexcept;
         myVector& operator = (const myVector<T>&);
         myVector& operator = (myVector<T>&&) noexcept;
-        ~myVector();
         void push_back(const T&);
+        void push_back(T&& n);
         T pop_back();
-        T get(size_t) const;
-        void set(size_t, const T&);
-        int getSize() const { return longitud; }
-        int getCapacity() const { return capacidad; }
-        T operator [] (size_t) const;
+        const T& at(size_t) const;
+        T& at(size_t);
+        size_t size() const { return longitud; }
+        size_t capacity() const { return capacidad; }
+        const T& operator [] (size_t) const;
         T& operator [] (size_t);
         void clear() { longitud = 0; }
         bool empty() const { return (longitud == 0); }
-        void redimensionP(size_t nuevaLongitud, const T& dato);
+        void resize(size_t nuevaLongitud);
+        void resize(size_t nuevaLongitud, const T& dato);
         void insertar(size_t, const T&);
         void eliminar(size_t);
 
@@ -50,102 +52,71 @@ template <class T> class myVector
     private:
         size_t capacidad;
         size_t longitud;
-        T* arreglo;
+        unique_ptr<T[]> arreglo;
         void redimension(size_t n=0);
-        void cambio(myVector<T>&) noexcept;
 };
-
-template<class T> void myVector<T> :: cambio(myVector<T>& v) noexcept
-{
-    using std::swap;
-    swap(capacidad,v.capacidad);
-    swap(longitud,v.longitud);
-    swap(arreglo,v.arreglo);
-}
 
 template <class T> myVector<T> :: myVector(size_t n):
     capacidad(n),
     longitud(0),
-    arreglo(nullptr)
-{
-    arreglo = new T[capacidad];
-}
+    arreglo(make_unique<T[]>(capacidad))
+{}
 
 template <class T> myVector<T> :: myVector(const myVector<T>& v):
     capacidad(v.capacidad),
     longitud(v.longitud),
-    arreglo(nullptr)
+    arreglo(make_unique<T[]>(capacidad))
 {
-    arreglo = new T[capacidad];
-    if(longitud != 0)
+    for(size_t i=0 ; i<longitud ; i++)
     {
-        arreglo = new T[capacidad];
-        try
-        {
-            for(size_t i=0; i<longitud ; i++)
-            {
-                arreglo[i] = v.arreglo[i];
-            }
-        }
-        catch(...)
-        {
-            delete[] arreglo;
-            throw;
-        }
+        arreglo[i] = v.arreglo[i];
     }
 }
 
 template <class T> myVector<T> :: myVector(myVector<T>&& v) noexcept:
     capacidad(v.capacidad),
     longitud(v.longitud),
-    arreglo(v.arreglo)
+    arreglo(move(v.arreglo))
 {
     v.capacidad = 0;
     v.longitud = 0;
-    v.arreglo = nullptr;
 }
 
 template<class T>  myVector<T>& myVector<T> :: operator = (const myVector<T>& v)
 {
+    if(this == &v) return *this;
     myVector<T> aux(v);
-    cambio(aux);
+    capacidad = v.capacidad;
+    longitud = v.longitud;
+    arreglo.swap(aux.arreglo);
     return *this;
 }
 
 template<class T> myVector<T>& myVector<T> :: operator = (myVector<T>&& v) noexcept
 {
     if(this == &v) return *this;
-    cambio(v);
+    capacidad = v.capacidad;
+    longitud = v.longitud;
+    v.capacidad = 0;
+    v.longitud = 0;
+    arreglo.swap(v.arreglo);
     return *this;
-}
-
-template <class T> myVector<T> :: ~myVector()
-{
-    delete[] arreglo;
 }
 
 template <class T> void myVector<T> :: redimension(size_t n)
 {
-    capacidad = capacidad*2;
-    if(n>capacidad)
+    size_t nuevaCapacidad = (capacidad == 0) ?  10 : capacidad*2;
+    if(n>nuevaCapacidad)
     {
-        capacidad = n;
+        nuevaCapacidad = n;
     }
-    T* aux = new T[capacidad];
-    try
+    auto aux = make_unique<T[]>(nuevaCapacidad);
+    for(size_t i=0 ; i<longitud ; i++)
     {
-        for(size_t i=0 ; i<longitud ; i++)
-        {
-            aux[i]=arreglo[i];
-        }
-        delete[] arreglo;
-        arreglo = aux;
+        aux[i] = move(arreglo[i]);
     }
-    catch(...)
-    {
-        delete[] aux;
-        throw;
-    }
+    capacidad = nuevaCapacidad;
+    arreglo.swap(aux);
 }
 
 template <class T> void myVector<T> :: push_back(const T& n)
@@ -158,6 +129,16 @@ template <class T> void myVector<T> :: push_back(const T& n)
     longitud++;
 }
 
+template <class T> void myVector<T> :: push_back(T&& n) 
+{
+    if(longitud == capacidad)
+    {
+        redimension();
+    }
+    arreglo[longitud] = move(n);
+    longitud++;
+}
+
 template<class T> T myVector<T> :: pop_back()
 {
     if(longitud == 0)
@@ -166,16 +147,17 @@ template<class T> T myVector<T> :: pop_back()
     }
     else
     {
+        T dato = move(arreglo[longitud-1]);
         longitud--;
-        return arreglo[longitud];
+        return dato;
     }
 }
 
-template<class T> T myVector<T> :: get(size_t index) const
+template<class T> const T& myVector<T> :: at(size_t index) const
 {
     if(index >= longitud)
     {
-        throw out_of_range("Indice fuera de rango en myVector::get()");
+        throw out_of_range("Indice fuera de rango en myVector::at()");
     }
     else
     {
@@ -184,43 +166,45 @@ template<class T> T myVector<T> :: get(size_t index) const
 }
 
 
-template<class T> void myVector<T> :: set(size_t index, const T& dato)
+template<class T> T& myVector<T> :: at(size_t index)
 {
     if(index >= longitud)
     {
-        throw out_of_range("Indice fuera de rango en myVector::set()");
-    }
-    else
-    {
-        arreglo[index] = dato;
-    }
-}
-
-template<class T> T myVector<T> ::operator [] (size_t index) const
-{
-    if(index >= longitud)
-    {
-        throw out_of_range("Indice fuera de rango en myVector::operator[]");
+        throw out_of_range("Indice fuera de rango en myVector::at()");
     }
     else
     {
         return arreglo[index];
     }
+}
+
+template<class T> const T& myVector<T> ::operator [] (size_t index) const
+{
+    return arreglo[index];
 }
 
 template<class T> T& myVector<T> :: operator [] (size_t index)
 {
-    if(index >= longitud)
+    return arreglo[index];
+}
+
+template<class T> void myVector<T> :: resize(size_t nuevaLongitud)
+{
+    if(nuevaLongitud < longitud)
     {
-        throw out_of_range("Indice fuera de rango en myVector::operator[]");
+        longitud=nuevaLongitud;
     }
-    else
+    else if(nuevaLongitud > longitud)
     {
-        return arreglo[index];
+        if(nuevaLongitud > capacidad)
+        {
+            redimension(nuevaLongitud);
+        }
+        longitud = nuevaLongitud;
     }
 }
 
-template<class T> void myVector<T> :: redimensionP(size_t nuevaLongitud, const T& dato)
+template<class T> void myVector<T> :: resize(size_t nuevaLongitud, const T& dato)
 {
     if(nuevaLongitud < longitud)
     {
@@ -242,23 +226,20 @@ template<class T> void myVector<T> :: redimensionP(size_t nuevaLongitud, const T
 
 template<class T> void myVector<T> :: insertar(size_t index, const T& dato)
 {
-    if(index >= longitud)
+    if(index > longitud)
     {
         throw out_of_range("Indice fuera de rango en myVector::insertar()");
     }
-    else
+    if(longitud == capacidad)
     {
-        if(longitud == capacidad)
-        {
-            redimension();
-        }
-        for(size_t i=longitud ; i>index ; i--)
-        {
-            arreglo[i] = arreglo[i-1];
-        }
-        arreglo[index] = dato;
-        longitud++;
+        redimension();
     }
+    for(size_t i=longitud ; i>index ; i--)
+    {
+        arreglo[i] = move(arreglo[i-1]);
+    }
+    arreglo[index] = dato;
+    longitud++;
 }
 
 template<class T> void myVector<T> :: eliminar(size_t index)
@@ -267,38 +248,11 @@ template<class T> void myVector<T> :: eliminar(size_t index)
     {
         throw out_of_range("Indice fuera de rango en myVector::eliminar()");
     }
-    else
+    --longitud;
+    for(size_t i=index ; i < longitud ; i++)
     {
-        --longitud;
-        for(size_t i=index ; i < longitud ; i++)
-        {
-            arreglo[i] = arreglo[i+1];
-        }
+        arreglo[i] = move(arreglo[i+1]);
     }
 }
-
-template<class T> ostream& operator << (ostream& oS,const myVector<T>& obj)
-{
-    oS << "[";
-    for(int i=0 ; i < obj.longitud ; i++)
-    {
-        oS << obj.arreglo[i];
-        if(i != (obj.longitud -1) )
-        {
-            oS << ", ";
-        }
-    }
-    oS << "]";
-    return oS;
-}
-
-/*istream& operator >> (istream& is,Cvector& v)
-{
-    Complejo numero;
-    cout << "Ingrese un Complejo(sera agregado al final del vector)" << endl;
-    is >> numero;
-    v.push_back(numero);
-    return is;
-}*/
 
 #endif // MYVECTOR_H
