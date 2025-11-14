@@ -1,0 +1,107 @@
+@startuml
+
+' ------------------------------
+' Calculador Impositivo y Facturas
+' ------------------------------
+class CalculadorImpositivo {
+    - nombre: string
+    - categoria: Categoria*
+    - facturas: vector<Factura>
+    - montoFijo: double
+    + CalculadorImpositivo(nombre: string, cat: Categoria*)
+    + agregarFactura(numero:int, detalle:string, monto:double)
+    + calcular(desde:int, hasta:int): ReciboDePago
+    + setMontoFijo(monto:double)
+    + getMontoFijo(): double
+    + getFacturas(): const vector<Factura>&
+}
+
+class Factura {
+    - numero: int
+    - detalle: string
+    - monto: double
+    + Factura(numero:int, detalle:string, monto:double)
+    + getNumero(): int
+    + getDetalle(): string
+    + getMonto(): double
+}
+
+class ReciboDePago {
+    - nombre: string
+    - montoFijo: double
+    - montoVariable: double
+    - primeraFactura: int
+    - ultimaFactura: int
+    + nombreDelContribuyente(): string
+    + montoTotal(): double
+    + montoFijo(): double
+    + montoVariable(): double
+    + primeraFacturaConsiderada(): int
+    + ultimaFacturaConsiderada(): int
+    + operator <<(ostream&, const ReciboDePago&)
+}
+
+abstract class Categoria {
+    + calcularMontoVariable(facturas: vector<Factura>): double
+}
+
+class CategoriaLimitada
+class CategoriaCompleta
+class CategoriaExtendida
+
+Categoria <|-- CategoriaLimitada
+Categoria <|-- CategoriaCompleta
+Categoria <|-- CategoriaExtendida
+CalculadorImpositivo --> Categoria
+CalculadorImpositivo --> Factura
+CalculadorImpositivo --> ReciboDePago
+
+' ------------------------------
+' Menu y MenuItems
+' ------------------------------
+class Menu {
+    - options: list<MenuItem*>
+    - exitLoop: bool
+    - contexto: T&
+    + Menu(calculador: CalculadorImpositivo&)
+    + addOption(MenuItem*)
+    + print()
+    + run()
+    + getExitFlag(): bool&
+}
+
+abstract class MenuItem {
+    + name(): string
+    + execute(contexto: T&)
+}
+
+class AddFacturaItem
+class CalcularImpuestoItem
+class SetMontoFijoItem
+class MostrarMontoFijoItem
+class MostrarFacturasItem
+class ExitProgram
+class BackItem
+class SubMenuItem<T, U> {
+    - title: string
+    - submenu: Menu<U>*
+    + getSubmenu(): Menu<U>&
+}
+
+Menu --> "0..*" MenuItem
+Menu --> CalculadorImpositivo : contexto
+MenuItem <|-- AddFacturaItem
+MenuItem <|-- CalcularImpuestoItem
+MenuItem <|-- SetMontoFijoItem
+MenuItem <|-- MostrarMontoFijoItem
+MenuItem <|-- MostrarFacturasItem
+MenuItem <|-- ExitProgram
+MenuItem <|-- BackItem
+MenuItem <|-- SubMenuItem
+
+SubMenuItem --> Menu
+SubMenuItem --> BackItem
+
+' Los MenuItem operan sobre el contexto recibido por parámetro, no tienen referencia directa a CalculadorImpositivo.
+
+@enduml
