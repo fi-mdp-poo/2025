@@ -32,11 +32,6 @@ template <class T> class myVector
         void resize(size_t nuevaLongitud, const T& dato);
         void insertar(size_t, const T&);
         void eliminar(size_t);
-        iterator begin() { return iterator(arreglo.get()); }
-        const_iterator begin() const { return const_iterator(arreglo.get()); } 
-        iterator end() { return iterator(arreglo.get() + longitud); }
-        const_iterator end() const { return const_iterator(arreglo.get() + longitud); }
-
         friend ostream& operator << (ostream& oS,const myVector<T>& obj)
         {
             oS << "[";
@@ -167,7 +162,10 @@ template <class T> class myVector
                 bool operator > (const const_iterator& it) const { return !(*this <= it); }
                 bool operator >= (const const_iterator& it) const { return !(*this < it); } 
         };
-             
+        iterator begin() { return iterator(arreglo.get()); }
+        const_iterator begin() const { return const_iterator(arreglo.get()); } 
+        iterator end() { return iterator(arreglo.get() + longitud); }
+        const_iterator end() const { return const_iterator(arreglo.get() + longitud); }
     private:
         size_t capacidad;
         size_t longitud;
